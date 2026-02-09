@@ -1,4 +1,5 @@
 import './EquipmentRental.css';
+
 const EquipmentRental = () => {
   const equipment = [
     {
@@ -43,6 +44,13 @@ const EquipmentRental = () => {
     }
   ];
 
+  const handleInquiry = () => {
+    const equipmentList = equipment.map(item => `• ${item.name}`).join('\n');
+    const message = `Hi, I'm interested in medical equipment rental/purchase. Please provide details for:\n\n${equipmentList}`;
+    const phoneNumber = "8009979128";
+    window.open(`https://wa.me/91${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
   return (
     <section id="equipment" className="section" aria-labelledby="equipment-heading">
       <div className="container">
@@ -51,31 +59,52 @@ const EquipmentRental = () => {
           <p>High-quality medical equipment available for rent or purchase with delivery across Lucknow</p>
         </header>
         
-        <div className="equipment-grid" role="list" aria-label="Medical equipment available">
-          {equipment.map((item, index) => (
-            <div key={index} className="equipment-card" role="listitem">
-              <div className="equipment-icon" aria-hidden="true">
-                <i className={item.icon}></i>
+        {/* Combined Equipment Card */}
+        <div className="combined-equipment-card" role="region" aria-label="All medical equipment">
+          <div className="equipment-header">
+            <h3>Available Medical Equipment</h3>
+            <p className="equipment-subtitle">Complete range of medical equipment for home care and hospital use</p>
+          </div>
+          
+          <div className="equipment-grid">
+            {equipment.map((item, index) => (
+              <div key={index} className="equipment-item" role="listitem">
+                <div className="equipment-icon">
+                  <i className={item.icon}></i>
+                </div>
+                <div className="equipment-details">
+                  <h4>{item.name}</h4>
+                  <p>{item.description}</p>
+                </div>
               </div>
-              <h3>{item.name}</h3>
-              <p>{item.description}</p>
-              <div className="equipment-actions" style={{ marginTop: '1rem' }}>
-                <a 
-                  href="tel:+918009979128"
-                  className="service-cta"
-                  style={{ fontSize: '0.9rem', padding: '0.5rem 1rem' }}
-                  aria-label={`Inquire about ${item.name}`}
-                >
-                  <i className="fas fa-phone-alt"></i> Inquire Now
-                </a>
-              </div>
+            ))}
+          </div>
+          
+          {/* Combined Inquiry Button */}
+          <div className="inquiry-section">
+            <div className="inquiry-info">
+              <i className="fas fa-info-circle"></i>
+              <p>All equipment available with delivery, setup, and maintenance support</p>
             </div>
-          ))}
+            <button 
+              className="combined-inquiry-btn"
+              onClick={handleInquiry}
+              aria-label="Inquire about all medical equipment"
+            >
+              <i className="fab fa-whatsapp"></i>
+              <span>Inquire About Equipment</span>
+              <i className="fas fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
         
-        <div className="equipment-notice" style={{ marginTop: '3rem', padding: '1.5rem', background: 'var(--light)', borderRadius: 'var(--border-radius)' }}>
-          <h3>Advance Life Support (ACLS) Ambulance - ICCU on Wheels</h3>
-          <p style={{ marginBottom: '1rem' }}>
+        {/* Ambulance Notice */}
+        <div className="equipment-notice">
+          <div className="notice-header">
+            <i className="fas fa-ambulance"></i>
+            <h3>Advance Life Support (ACLS) Ambulance - ICCU on Wheels</h3>
+          </div>
+          <p>
             Our fully equipped ICU ambulance is available 24/7 with trained paramedics, 
             ventilator support, cardiac monitor, and emergency medications.
           </p>
@@ -83,10 +112,20 @@ const EquipmentRental = () => {
             <a 
               href="tel:+918009979128"
               className="btn-primary"
-              style={{ background: 'var(--accent)', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
               aria-label="Call for ambulance service"
             >
-              <i className="fas fa-ambulance"></i> Call Ambulance: +91 8009979128
+              <i className="fas fa-phone-alt"></i> 
+              <span>Call Ambulance: +91 8009979128</span>
+            </a>
+            <a 
+              href={`https://wa.me/918009979128?text=Hi,%20I%20need%20ambulance%20service%20with%20ICCU%20facilities`}
+              className="btn-secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp for ambulance service"
+            >
+              <i className="fab fa-whatsapp"></i>
+              <span>WhatsApp Inquiry</span>
             </a>
           </div>
         </div>

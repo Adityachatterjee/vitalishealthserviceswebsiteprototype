@@ -1,0 +1,1187 @@
+/* CombinedMedical.css - Enhanced Responsive Layout with Dark Theme Fixes */
+
+:root {
+  /* Light Theme Variables */
+  --section-bg-light: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  --card-bg-light: rgba(255, 255, 255, 0.98);
+  --card-border-light: rgba(0, 0, 0, 0.08);
+  --card-shadow-light: 0 10px 30px rgba(0, 0, 0, 0.08);
+  
+  /* Dark Theme Variables - Enhanced contrast */
+  --section-bg-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  --card-bg-dark: rgba(25, 25, 25, 0.95);
+  --card-border-dark: rgba(255, 255, 255, 0.15);
+  --card-shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.5);
+  
+  /* Default to light theme */
+  --section-bg: var(--section-bg-light);
+  --card-bg: var(--card-bg-light);
+  --card-border: var(--card-border-light);
+  --card-shadow: var(--card-shadow-light);
+  
+  /* Colors - Enhanced for dark theme */
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --primary-blue: #2563eb;
+  --accent-orange: #ff6b35;
+  --whatsapp-green: #25D366;
+  --emergency-red: #ef4444;
+  --medical-blue: #3b82f6;
+  --physio-purple: #8b5cf6;
+  --success-green: #10b981;
+  
+  /* Safe area insets for iOS notch */
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
+}
+
+/* Dark theme preference - ENHANCED VISIBILITY */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --section-bg: var(--section-bg-dark);
+    --card-bg: var(--card-bg-dark);
+    --card-border: var(--card-border-dark);
+    --card-shadow: var(--card-shadow-dark);
+    --text-primary: rgba(255, 255, 255, 0.98);
+    --text-secondary: rgba(255, 255, 255, 0.75);
+    --primary-blue: #60a5fa;
+    --accent-orange: #ff8c5a;
+    --medical-blue: #60a5fa;
+    --physio-purple: #a78bfa;
+  }
+}
+
+/* Reset and Base Styles */
+.combined-medical-section {
+  padding: calc(60px + var(--safe-area-inset-top)) 0 calc(60px + var(--safe-area-inset-bottom));
+  background: var(--section-bg);
+  position: relative;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Container with safe area padding */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 max(20px, var(--safe-area-inset-left)) 0 max(20px, var(--safe-area-inset-right));
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Dark theme specific background fixes */
+@media (prefers-color-scheme: dark) {
+  .combined-medical-section {
+    background: var(--section-bg-dark);
+  }
+  
+  .service-card {
+    background: rgba(20, 20, 20, 0.95);
+  }
+  
+  .treatment-item,
+  .service-item {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  /* Fix scrollbar for dark theme */
+  .treatments-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  .treatments-list::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--accent-orange), var(--medical-blue));
+  }
+}
+
+/* Touch-friendly tap targets */
+@media (hover: none) and (pointer: coarse) {
+  button, 
+  a,
+  .whatsapp-btn,
+  .call-btn,
+  .director-contact-btn,
+  .emergency-btn,
+  .treatment-item,
+  .service-item {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .contact-actions a {
+    min-height: 48px;
+  }
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(30px, 5vw, 50px);
+  padding: 0 10px;
+}
+
+.section-header h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: clamp(10px, 2vw, 15px);
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+/* Fix gradient for dark theme */
+@media (prefers-color-scheme: dark) {
+  .section-header h1 {
+    background: linear-gradient(135deg, #ffffff 0%, var(--primary-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.section-subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-secondary);
+  max-width: min(800px, 90%);
+  margin: 0 auto;
+  line-height: 1.6;
+  padding: 0 10px;
+}
+
+/* Services Grid - Responsive Layout */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr));
+  gap: clamp(20px, 3vw, 30px);
+  margin-bottom: clamp(20px, 3vw, 30px);
+}
+
+/* Service Cards */
+.service-card {
+  background: var(--card-bg);
+  border-radius: clamp(12px, 2vw, 16px);
+  padding: clamp(20px, 3vw, 30px);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: fit-content;
+  -webkit-tap-highlight-color: transparent;
+  backdrop-filter: blur(10px);
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Card borders - Enhanced for dark theme */
+.doctor-card {
+  border-top: 4px solid var(--medical-blue);
+}
+
+.treatments-card {
+  border-top: 4px solid var(--success-green);
+}
+
+.physio-card {
+  border-top: 4px solid var(--physio-purple);
+}
+
+.physio-treatments-card {
+  border-top: 4px solid var(--physio-purple);
+}
+
+/* Doctor Profile Header */
+.doctor-profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(15px, 3vw, 20px);
+  margin-bottom: clamp(20px, 3vw, 30px);
+  padding-bottom: clamp(15px, 3vw, 20px);
+  border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+}
+
+@media (min-width: 640px) {
+  .doctor-profile-header {
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+
+.doctor-icon {
+  width: clamp(70px, 10vw, 80px);
+  height: clamp(70px, 10vw, 80px);
+  background: linear-gradient(135deg, var(--medical-blue) 0%, #1d4ed8 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  flex-shrink: 0;
+}
+
+.physio-icon {
+  background: linear-gradient(135deg, var(--physio-purple) 0%, #6d28d9 100%);
+}
+
+.doctor-info {
+  text-align: center;
+  flex: 1;
+}
+
+@media (min-width: 640px) {
+  .doctor-info {
+    text-align: left;
+  }
+}
+
+.doctor-info h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.doctor-qualifications {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .doctor-qualifications {
+    justify-content: flex-start;
+  }
+}
+
+.qualification {
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--medical-blue);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  font-weight: 600;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  white-space: nowrap;
+}
+
+.doctor-specialty {
+  color: var(--medical-blue);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* Section Blocks */
+.section-block {
+  margin-bottom: clamp(15px, 3vw, 25px);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.section-title i {
+  color: var(--accent-orange);
+  font-size: 1.1rem;
+}
+
+/* Experience List */
+.experience-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.experience-list li {
+  margin-bottom: clamp(10px, 2vw, 15px);
+  padding-left: 25px;
+  position: relative;
+}
+
+.experience-list li::before {
+  content: "•";
+  color: var(--medical-blue);
+  font-size: 1.5rem;
+  position: absolute;
+  left: 0;
+  top: -5px;
+}
+
+.experience-list strong {
+  display: block;
+  color: var(--text-primary);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.experience-list p {
+  color: var(--text-secondary);
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Address Text */
+.address-text {
+  color: var(--text-secondary);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.6;
+  margin: 0;
+  padding-left: 5px;
+}
+
+/* Contact Actions */
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+@media (min-width: 480px) {
+  .contact-actions {
+    flex-direction: row;
+    gap: 15px;
+  }
+}
+
+.whatsapp-btn,
+.call-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: clamp(10px, 2vw, 12px) clamp(15px, 3vw, 20px);
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  border: 2px solid transparent;
+  min-height: 48px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.whatsapp-btn {
+  background: linear-gradient(135deg, var(--whatsapp-green) 0%, #128C7E 100%);
+  color: white;
+}
+
+.whatsapp-btn:hover,
+.whatsapp-btn:active {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+}
+
+.call-btn {
+  background: linear-gradient(135deg, var(--accent-orange) 0%, #ff4757 100%);
+  color: white;
+}
+
+.call-btn:hover,
+.call-btn:active {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+}
+
+/* Treatments Header */
+.treatments-header {
+  text-align: center;
+  margin-bottom: clamp(15px, 3vw, 25px);
+  padding-bottom: clamp(15px, 3vw, 20px);
+  border-bottom: 2px solid var(--card-border);
+}
+
+.treatments-header h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.treatments-subtitle {
+  color: var(--text-secondary);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Treatments List */
+.treatments-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  max-height: min(500px, 60vh);
+  overflow-y: auto;
+  padding-right: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.treatments-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.treatments-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .treatments-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.treatments-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-orange), var(--primary-blue));
+  border-radius: 10px;
+}
+
+.treatment-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: clamp(12px, 2vw, 14px) clamp(15px, 3vw, 18px);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  .treatment-item {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.treatment-item:hover,
+.treatment-item:active {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 107, 53, 0.3);
+  transform: translateX(5px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .treatment-item:hover,
+  .treatment-item:active {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 107, 53, 0.4);
+  }
+}
+
+.treatment-item i {
+  color: var(--medical-blue);
+  font-size: 1rem;
+}
+
+.treatment-item i.fa-heartbeat {
+  color: var(--physio-purple);
+}
+
+/* Services Grid Small */
+.services-grid-small {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: clamp(12px, 2vw, 15px);
+}
+
+.service-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: clamp(12px, 2vw, 15px);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  text-align: center;
+  transition: all 0.3s ease;
+  min-height: 100px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  .service-item {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.service-item:hover,
+.service-item:active {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+  .service-item:hover,
+  .service-item:active {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(139, 92, 246, 0.4);
+  }
+}
+
+.service-item i {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  color: var(--physio-purple);
+}
+
+.service-item span {
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Director Section */
+.director-section {
+  background: var(--card-bg);
+  border-radius: clamp(12px, 2vw, 16px);
+  padding: clamp(20px, 3vw, 25px) clamp(20px, 3vw, 30px);
+  margin: clamp(25px, 4vw, 40px) 0;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+.director-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(15px, 3vw, 20px);
+}
+
+@media (min-width: 768px) {
+  .director-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.director-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .director-info {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+.director-info i {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--accent-orange);
+}
+
+.director-text h3 {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+
+.director-text p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+}
+
+.director-contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 25px);
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--medical-blue) 100%);
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  min-height: 48px;
+  width: 100%;
+  max-width: 300px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .director-contact-btn {
+    width: auto;
+    max-width: none;
+  }
+}
+
+.director-contact-btn:hover,
+.director-contact-btn:active {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Emergency Banner */
+.emergency-banner {
+  background: linear-gradient(135deg, var(--emergency-red) 0%, #dc2626 100%);
+  border-radius: clamp(12px, 2vw, 16px);
+  padding: clamp(20px, 3vw, 25px) clamp(20px, 3vw, 30px);
+  color: white;
+  margin-top: clamp(25px, 4vw, 40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.emergency-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(15px, 3vw, 20px);
+}
+
+@media (min-width: 768px) {
+  .emergency-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.emergency-content i.fa-ambulance {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  opacity: 0.9;
+}
+
+.emergency-text {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .emergency-text {
+    text-align: left;
+  }
+}
+
+.emergency-text h3 {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: white;
+}
+
+.emergency-text p {
+  opacity: 0.9;
+  margin: 0;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.emergency-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: clamp(12px, 2vw, 14px) clamp(20px, 4vw, 25px);
+  background: white;
+  color: var(--emergency-red);
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  min-height: 48px;
+  width: 100%;
+  max-width: 300px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .emergency-btn {
+    width: auto;
+    max-width: none;
+  }
+}
+
+.emergency-btn:hover,
+.emergency-btn:active {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+  background: #f8fafc;
+}
+
+/* DARK THEME SPECIFIC FIXES - CORRECTED VERSION */
+@media (prefers-color-scheme: dark) {
+  /* Fix qualification tags - most important fix */
+  .qualification {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.25), rgba(96, 165, 250, 0.35)) !important;
+    color: white !important;
+    border: 1px solid rgba(96, 165, 250, 0.5) !important;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Physio-specific qualifications */
+  .physio-card .qualification {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(168, 85, 247, 0.35)) !important;
+    color: white !important;
+    border: 1px solid rgba(168, 85, 247, 0.5) !important;
+  }
+  
+  /* Fix doctor's name and specialty visibility */
+  .doctor-info h2 {
+    color: rgba(255, 255, 255, 1) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  .doctor-specialty {
+    color: rgba(96, 165, 250, 0.95) !important;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Fix section titles and icons */
+  .section-title {
+    color: rgba(255, 255, 255, 1) !important;
+    font-weight: 700;
+  }
+  
+  .section-title i {
+    color: #ff8c5a !important;
+    filter: brightness(1.2);
+  }
+  
+  /* Fix experience list text */
+  .experience-list strong {
+    color: rgba(255, 255, 255, 1) !important;
+  }
+  
+  .experience-list p {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+  
+  /* Fix address text */
+  .address-text {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+  
+  /* Fix treatment item text */
+  .treatment-item {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+  
+  /* Fix service item text */
+  .service-item span {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+  
+  /* Fix all other text elements */
+  .section-subtitle,
+  .treatments-header h2,
+  .treatments-subtitle,
+  .director-text h3,
+  .director-text p {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+  
+  .treatments-subtitle,
+  .director-text p,
+  .section-subtitle {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+  
+  /* Fix borders visibility */
+  .service-card {
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .doctor-profile-header {
+    border-bottom: 2px solid rgba(96, 165, 250, 0.3) !important;
+  }
+  
+  .treatments-header {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  /* Fix card backgrounds */
+  .service-card {
+    background: rgba(20, 20, 20, 0.95) !important;
+  }
+  
+  /* Improve contrast for interactive elements */
+  .whatsapp-btn:hover,
+  .whatsapp-btn:active,
+  .call-btn:hover,
+  .call-btn:active,
+  .director-contact-btn:hover,
+  .director-contact-btn:active,
+  .emergency-btn:hover,
+  .emergency-btn:active {
+    filter: brightness(1.1);
+  }
+  
+  /* Ensure icons are visible */
+  .section-title i,
+  .treatment-item i,
+  .service-item i,
+  .director-info i,
+  .emergency-content i.fa-ambulance {
+    filter: brightness(1.2);
+  }
+  
+  /* Improve gradient visibility */
+  .doctor-icon,
+  .physio-icon {
+    filter: brightness(1.1);
+  }
+}
+
+/* iOS Specific Optimizations */
+@supports (-webkit-touch-callout: none) {
+  .combined-medical-section {
+    padding-top: max(60px, calc(60px + var(--safe-area-inset-top)));
+    padding-bottom: max(60px, calc(60px + var(--safe-area-inset-bottom)));
+  }
+  
+  .service-card,
+  .treatment-item,
+  .service-item {
+    border-radius: 20px;
+  }
+  
+  .contact-actions a,
+  .director-contact-btn,
+  .emergency-btn {
+    border-radius: 12px;
+  }
+}
+
+/* Android Chrome/Safari optimization */
+@media (-webkit-min-device-pixel-ratio: 2) {
+  .service-card {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+}
+
+/* Large Desktop Screens */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+  
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .combined-medical-section {
+    padding: 20px 0;
+    background: white;
+  }
+  
+  .service-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+  
+  .contact-actions,
+  .director-contact-btn,
+  .emergency-btn {
+    display: none;
+  }
+  
+  /* Ensure print readability */
+  * {
+    color: #000 !important;
+    background: white !important;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .whatsapp-btn,
+  .call-btn,
+  .director-contact-btn,
+  .emergency-btn,
+  .treatment-item,
+  .service-item {
+    transition: none;
+    transform: none !important;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --card-border-light: #000000;
+    --card-border-dark: #ffffff;
+  }
+  
+  .service-card {
+    border: 2px solid var(--card-border);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .treatment-item,
+    .service-item {
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .treatment-item:hover,
+    .service-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .qualification {
+      background: rgba(96, 165, 250, 0.4);
+      border: 2px solid var(--medical-blue);
+    }
+  }
+}
+/* FIX for Physio Clinical Information section in dark mode */
+@media (prefers-color-scheme: dark) {
+  /* Fix physio clinic information text */
+  .physio-card .experience-list strong {
+    color: rgba(255, 255, 255, 1) !important;
+    font-weight: 600;
+  }
+  
+  .physio-card .experience-list p {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+  
+  /* Specifically target the "Dr. Shankara's Physio Rehabilitation Clinic" text */
+  .physio-card .experience-list li strong:first-child {
+    color: rgba(255, 255, 255, 1) !important;
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+  }
+  
+  /* Fix the "24/7 Home Physiotherapy Services in Lucknow" text */
+  .physio-card .experience-list li p {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+  }
+  
+  /* Fix additional services heading */
+  .physio-card .section-title {
+    color: rgba(255, 255, 255, 1) !important;
+  }
+  
+  /* Fix service items in physio card */
+  .physio-card .service-item {
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+  
+  .physio-card .service-item:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+  }
+  
+  .physio-card .service-item span {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+  
+  .physio-card .service-item i {
+    color: rgba(168, 85, 247, 0.9) !important;
+  }
+}
+/* DARK THEME FIX FOR PHYSIO CLINIC INFORMATION - FINAL CORRECTION */
+@media (prefers-color-scheme: dark) {
+  /* This will target ALL text in the physio card that's not already styled */
+  .physio-card {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+  
+  /* Specifically target paragraphs in physio card */
+  .physio-card p {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+  
+  /* Target the clinic information specifically */
+  .physio-card .section-block p,
+  .physio-card .section-block div,
+  .physio-card .section-block span {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+  
+  /* Make sure all text inherits the color */
+  .physio-card *:not(.qualification):not(.qualification *) {
+    color: inherit !important;
+  }
+}
+/* DIRECTOR SECTION FIX - Complete dark theme compatibility */
+.director-section {
+  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(var(--card-bg), 0.8) 100%);
+  border-radius: clamp(12px, 2vw, 16px);
+  padding: clamp(20px, 3vw, 25px) clamp(20px, 3vw, 30px);
+  margin: clamp(25px, 4vw, 40px) 0;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  position: relative;
+  z-index: 1;
+}
+
+.director-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(15px, 3vw, 20px);
+}
+
+@media (min-width: 768px) {
+  .director-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.director-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .director-info {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+.director-info i {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--accent-orange);
+}
+
+.director-text h3 {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+.director-text p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  line-height: 1.5;
+}
+
+.director-contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 25px);
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--medical-blue) 100%);
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  min-height: 48px;
+  width: 100%;
+  max-width: 300px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .director-contact-btn {
+    width: auto;
+    max-width: none;
+  }
+}
+
+.director-contact-btn:hover,
+.director-contact-btn:active {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Dark theme specific fixes for director section */
+@media (prefers-color-scheme: dark) {
+  .director-section {
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(25, 25, 25, 0.9) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  }
+  
+  .director-text h3 {
+    color: rgba(255, 255, 255, 0.98) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  .director-text p {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+  
+  .director-info i {
+    color: #ff8c5a !important;
+    filter: brightness(1.2);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  .director-contact-btn {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%) !important;
+    color: white !important;
+  }
+  
+  .director-contact-btn:hover,
+  .director-contact-btn:active {
+    box-shadow: 0 8px 20px rgba(96, 165, 250, 0.3) !important;
+    filter: brightness(1.1);
+  }
+}

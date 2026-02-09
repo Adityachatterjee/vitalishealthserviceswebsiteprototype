@@ -1,4 +1,5 @@
-import './Services.css'
+import './Services.css';
+
 const Services = () => {
   const services = [
     {
@@ -82,6 +83,25 @@ const Services = () => {
     }
   ];
 
+  const additionalServices = [
+    'IV Injection at Home',
+    'ICU Setup at Home',
+    'Medical Equipment Rental',
+    'X-Ray at Home',
+    'Lab Tests at Home',
+    'Physiotherapy at Home',
+    'Post-Operative Care',
+    'Palliative Care'
+  ];
+
+  const handleServiceInquiry = () => {
+    const serviceList = services.map(service => `• ${service.title}`).join('\n');
+    const additionalList = additionalServices.map(service => `• ${service}`).join('\n');
+    const message = `Hi, I'm interested in healthcare services. Please provide details for:\n\nMain Services:\n${serviceList}\n\nAdditional Services:\n${additionalList}`;
+    const phoneNumber = "8009979128";
+    window.open(`https://wa.me/91${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
   return (
     <section id="services" className="section" aria-labelledby="services-heading">
       <div className="container">
@@ -90,71 +110,69 @@ const Services = () => {
           <p>Comprehensive medical care services delivered at your home by certified professionals</p>
         </header>
         
-        <div className="services-grid" role="list" aria-label="Healthcare services list">
-          {services.map((service) => (
-            <article 
-              key={service.id} 
-              className={`service-card ${service.featured ? 'featured' : ''}`}
-              role="listitem"
-              itemScope
-              itemType="https://schema.org/MedicalService"
-            >
-              <meta itemProp="serviceType" content={service.title} />
-              <div className="service-icon" aria-hidden="true">
-                <i className={service.icon}></i>
+        {/* Combined Services Card */}
+        <div className="combined-services-card" role="region" aria-label="All healthcare services">
+          <div className="services-header">
+            <h3>Complete Healthcare Services</h3>
+            <p className="services-subtitle">Professional medical care services available 24/7 at your doorstep</p>
+          </div>
+          
+          <div className="services-grid">
+            {services.map((service) => (
+              <div key={service.id} className="service-item" role="listitem">
+                <div className="service-item-icon">
+                  <i className={service.icon}></i>
+                </div>
+                <div className="service-item-content">
+                  <h4>{service.title}</h4>
+                  <p>{service.description}</p>
+                  <ul className="service-features-list">
+                    {service.features.map((feature, index) => (
+                      <li key={index}>
+                        <i className="fas fa-check"></i>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <h3 itemProp="name">{service.title}</h3>
-              <p itemProp="description">{service.description}</p>
-              <ul className="service-features" aria-label={`Features of ${service.title}`}>
-                {service.features.map((feature, index) => (
-                  <li key={index}>
-                    <i className="fas fa-check-circle" aria-hidden="true"></i> 
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="service-actions">
-                <a 
-                  href={`https://wa.me/918009979128?text=I'm interested in ${encodeURIComponent(service.title)} service from VITALIS`}
-                  className="service-cta"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Get quote for ${service.title}`}
-                >
-                  <i className="fab fa-whatsapp" aria-hidden="true"></i> Get Quote
-                </a>
-                <a 
-                  href="tel:+918009979128"
-                  className="service-cta"
-                  style={{ background: 'var(--primary)', marginLeft: '10px' }}
-                  aria-label={`Call about ${service.title}`}
-                >
-                  <i className="fas fa-phone-alt" aria-hidden="true"></i> Call Now
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
-        
-        <div className="additional-services" style={{ marginTop: '3rem', textAlign: 'center' }}>
-          <h3>Additional Services Available</h3>
-          <div className="service-tags" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '1rem' }}>
-            {['IV Injection at Home', 'ICU Setup at Home', 'Medical Equipment Rental', 'X-Ray at Home', 'Lab Tests at Home'].map((tag) => (
-              <span 
-                key={tag}
-                style={{
-                  background: 'var(--light)',
-                  padding: '0.5rem 1.5rem',
-                  borderRadius: '30px',
-                  fontWeight: '500',
-                  color: 'var(--primary)'
-                }}
-              >
-                {tag}
-              </span>
             ))}
           </div>
+          
+          {/* Additional Services */}
+          <div className="additional-services-section">
+            <div className="additional-header">
+              <i className="fas fa-plus-circle"></i>
+              <h4>Additional Services</h4>
+            </div>
+            <div className="additional-tags">
+              {additionalServices.map((service) => (
+                <span key={service} className="service-tag">
+                  {service}
+                </span>
+              ))}
+            </div>
+          </div>
+          
+          {/* Combined Inquiry Button */}
+          <div className="services-inquiry-section">
+            <div className="inquiry-info">
+              <i className="fas fa-info-circle"></i>
+              <p>All services include certified professionals, regular monitoring, and emergency support</p>
+            </div>
+            <button 
+              className="services-inquiry-btn"
+              onClick={handleServiceInquiry}
+              aria-label="Inquire about all healthcare services"
+            >
+              <i className="fab fa-whatsapp"></i>
+              <span>Get Healthcare Services</span>
+              <i className="fas fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
+        
+
       </div>
     </section>
   );

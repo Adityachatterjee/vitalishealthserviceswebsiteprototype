@@ -271,3 +271,32 @@ body {
     }
   }
 }
+/* Add this to your main CSS file (index.css or App.css) */
+
+/* Fix for phone icons that appear mirrored */
+.fa-phone,
+.fa-phone-alt {
+  transform: scaleX(-1); /* This mirrors/flips the icon horizontally */
+}
+
+/* If you want to fix it only in specific contexts */
+.emergency-btn .fa-phone,
+.service-cta .fa-phone-alt,
+.navbar .fa-phone,
+.contact-item .fa-phone-alt {
+  transform: scaleX(-1);
+}
+
+/* For WhatsApp button specifically (if you want consistent direction) */
+.btn-primary .fa-whatsapp,
+.whatsapp-button .fa-whatsapp {
+  transform: none; /* WhatsApp icon looks fine as is */
+}
+
+/* Responsive adjustment if needed */
+@media (max-width: 768px) {
+  .fa-phone,
+  .fa-phone-alt {
+    transform: scaleX(-1) scale(0.9); /* Keep mirrored but slightly smaller on mobile */
+  }
+}
